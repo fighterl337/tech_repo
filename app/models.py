@@ -53,4 +53,3 @@ class Issue(Base):
     book = relationship("Book", back_populates="issues")
     reader = relationship("Reader", back_populates="issues")
 
-

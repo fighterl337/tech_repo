@@ -35,12 +35,18 @@ def return_book(issue_id: int, db: Session = Depends(get_db)):
     if not issue:
         raise HTTPException(status_code=404, detail="Issue not found")
 
-    book = db.query(Book).filter(Book.id == issue.book_id).first()
+    # Получаем книгу через relationship (она уже загружена)
+    book = issue.book  # ← ИЗМЕНИ ЭТО
+
+    if not book:
+        raise HTTPException(status_code=404, detail="Book not found")
 
     issue.status = IssueStatus.returned
     issue.return_date = date.today()
     book.status = BookStatus.available
 
     db.commit()
+
+    return {"message": "Book returned"}
 
     return {"message": "Book returned"}
