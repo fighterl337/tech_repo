@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h3>Выдать книгу</h3>
+
+<form method="post" action="/issue_page">
+    <label>Книга:</label>
+    <select name="book_id">
+        {% for book in books %}
+            {% if book.status == "available" %}
+                <option value="{{ book.id }}">{{ book.title }}</option>
+            {% endif %}
+        {% endfor %}
+    </select>
+
+    <label>Читатель:</label>
+    <select name="reader_id">
+        {% for reader in readers %}
+            <option value="{{ reader.id }}">{{ reader.full_name }}</option>
+        {% endfor %}
+    </select>
+
+    <button type="submit">Выдать</button>
+</form>
+
+<hr>
+
+<h2>Выдачи книг</h2>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Книга</th>
+        <th>Читатель</th>
+        <th>Статус</th>
+        <th>Действие</th>
+
+    </tr>
+    {% for issue in issues %}
+    <tr>
+        <td>{{ issue.id }}</td>
+        <td>{{ issue.book.title }}</td>
+        <td>{{ issue.reader.full_name }}</td>
+        <td>{{ issue.status }}</td>
+        <td>
+    {% if issue.status == "issued" %}
+    <form method="post" action="/return_book/{{ issue.id }}">
+        <button type="submit">Вернуть</button>
+    </form>
+    {% endif %}
+</td>
+
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

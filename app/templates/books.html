@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Список книг</h2>
+
+<a href="/add_book_page">Добавить книгу</a>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Название</th>
+        <th>Автор</th>
+        <th>Статус</th>
+        <th>Действие</th>
+    </tr>
+    {% for book in books %}
+    <tr>
+        <td>{{ book.id }}</td>
+        <td>{{ book.title }}</td>
+        <td>{{ book.author }}</td>
+        <td>{{ book.status }}</td>
+        <td>
+    <form method="post" action="/delete_book/{{ book.id }}">
+        <button type="submit">Удалить</button>
+    </form>
+</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Список читателей</h2>
+<a href="/add_reader_page">Добавить читателя</a>
+<br><br>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>ФИО</th>
+        <th>Email</th>
+        <th>Телефон</th>
+    </tr>
+    {% for reader in readers %}
+    <tr>
+        <td>{{ reader.id }}</td>
+        <td>{{ reader.full_name }}</td>
+        <td>{{ reader.email }}</td>
+        <td>{{ reader.phone }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}
