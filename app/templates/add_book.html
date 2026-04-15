@@ -1,19 +1,27 @@
 {% extends "base.html" %}
 {% block content %}
+<div class="page-header">
+    <h2>Добавить книгу</h2>
+</div>
 
-<h2>Добавить книгу</h2>
+<div class="card form-card">
+    <form method="post" class="form-grid">
+        <div>
+            <label>Название</label>
+            <input type="text" name="title" required>
+        </div>
 
-<form method="post">
-    <label>Название:</label><br>
-    <input type="text" name="title" required><br><br>
+        <div>
+            <label>Автор</label>
+            <input type="text" name="author" required>
+        </div>
 
-    <label>Автор:</label><br>
-    <input type="text" name="author" required><br><br>
+        <div>
+            <label>Год</label>
+            <input type="number" name="year" required>
+        </div>
 
-    <label>Год:</label><br>
-    <input type="number" name="year" required><br><br>
-
-    <button type="submit">Добавить</button>
-</form>
-
+        <button type="submit" class="btn">Добавить</button>
+    </form>
+</div>
 {% endblock %}

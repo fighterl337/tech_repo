@@ -1,18 +1,57 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Library System</title>
     <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
-    <h1>Система управления библиотекой</h1>
-    <nav>
-        <a href="/">Главная</a> |
-        <a href="/books_page">Книги</a> |
-        <a href="/readers_page">Читатели</a> |
-        <a href="/issue_page">Выдача</a>
-    </nav>
-    <hr>
-    {% block content %}{% endblock %}
+    <header class="topbar">
+        <a href="/" class="logo">БиблиоShop</a>
+        <div class="topbar-subtitle">Система управления библиотекой</div>
+        <nav class="topnav">
+            <a href="/">Главная</a>
+            <a href="/books_page">Книги</a>
+            <a href="/readers_page">Читатели</a>
+            <a href="/issue_page">Выдача</a>
+        </nav>
+    </header>
+
+    <main class="container with-sidebar">
+        <aside class="sidebar">
+            <h3>Разделы</h3>
+            <ul>
+                <li><a href="/">Обзор</a></li>
+                <li><a href="/books_page">Каталог книг</a></li>
+                <li><a href="/readers_page">База читателей</a></li>
+                <li><a href="/issue_page">Операции выдачи</a></li>
+            </ul>
+        </aside>
+
+        <section class="content-main">
+            {% block content %}
+            <div class="hero">
+                <h1>Добро пожаловать в БиблиоShop</h1>
+                <p>Управляйте каталогом, читателями и выдачами в одном современном интерфейсе.</p>
+            </div>
+
+            <div class="stats-grid">
+                <a href="/books_page" class="stat-card">
+                    <span class="stat-title">Каталог книг</span>
+                    <span class="stat-text">Просмотр, добавление и удаление книг</span>
+                </a>
+                <a href="/readers_page" class="stat-card">
+                    <span class="stat-title">Читатели</span>
+                    <span class="stat-text">Регистрация и управление контактами</span>
+                </a>
+                <a href="/issue_page" class="stat-card">
+                    <span class="stat-title">Выдача</span>
+                    <span class="stat-text">Оформление выдачи и возврата</span>
+                </a>
+            </div>
+            {% endblock %}
+        </section>
+    </main>
 </body>
 </html>
