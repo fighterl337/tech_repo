@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>{{ book.title }}</h2>
+<p><strong>Автор:</strong> {{ book.author }}</p>
+<p><strong>Год:</strong> {{ book.year }}</p>
+<p><strong>Статус:</strong> {{ book.status }}</p>
+
+<hr>
+
+<h3>📚 С этой книгой также рекомендуют:</h3>
+<div id="recommendations">
+    <p>Загрузка рекомендаций...</p>
+</div>
+
+<script>
+    fetch(`/recommendations/for-book/{{ book.id }}`)
+        .then(response => response.json())
+        .then(books => {
+            const container = document.getElementById('recommendations');
+            if (!books.length) {
+                container.innerHTML = '<p>Рекомендаций пока нет.</p>';
+                return;
+            }
+            const ul = document.createElement('ul');
+            books.forEach(book => {
+                const li = document.createElement('li');
+                const link = document.createElement('a');
+                link.href = `/book_detail/${book.id}`;
+                link.textContent = `${book.title} — ${book.author} (${book.year})`;
+                li.appendChild(link);
+                ul.appendChild(li);
+            });
+            container.innerHTML = '';
+            container.appendChild(ul);
+        })
+        .catch(error => {
+            console.error('Ошибка:', error);
+            document.getElementById('recommendations').innerHTML = '<p>Не удалось загрузить рекомендации.</p>';
+        });
+</script>
+
+<a href="/books_page">← Назад к списку книг</a>
+
+{% endblock %}

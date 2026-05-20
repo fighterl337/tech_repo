@@ -18,9 +18,10 @@ templates = Jinja2Templates(directory="app/templates")
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
 
 
-from .routes import books, readers, issues, pages
+from .routes import books, readers, issues, pages, recommendations
 
 app.include_router(books.router)
 app.include_router(readers.router)
 app.include_router(issues.router)
 app.include_router(pages.router)
+app.include_router(recommendations.router)
